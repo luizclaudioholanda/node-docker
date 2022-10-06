@@ -1,8 +1,7 @@
-FROM node:7             
-RUN mkdir -p /app
-WORKDIR /app             
-COPY package.json /app   
-RUN npm install          
-COPY . /app       
-EXPOSE 4200
-CMD ["npm", "run", "start"]
+FROM node:12 
+WORKDIR /usr/src/app 
+COPY package*.json ./ 
+RUN npm install
+COPY . . 
+EXPOSE 8000
+CMD [ "node", "index.js" ]
