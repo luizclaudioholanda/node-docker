@@ -16,7 +16,7 @@ spec:
     spec: 
      containers:
       - name: node-docker
-        image: luizholandadocker/node-docker:latest
+        image: luizholandadocker/node-docker
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8000
