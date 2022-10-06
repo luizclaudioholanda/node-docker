@@ -36,6 +36,7 @@ pipeline{
               steps{
                 withKubeConfig([credentialsId: 'minikube']) {
                   sh 'kubectl apply -f deployment.yaml'
+                  sh "kubectl rollout history deployment nodejs-deployment"
                 }
               }
         }
