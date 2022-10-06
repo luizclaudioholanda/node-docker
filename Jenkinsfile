@@ -33,9 +33,14 @@ pipeline{
                 } 
            }
            stage('Deploying into k8s'){
-            steps{
-                sh 'kubectl apply -f deployment.yaml' 
-            }
+              steps{
+                withKubeConfig([credentialsId: 'minikube', serverUrl: 'http://127.0.0.1:34597/']) {
+                  sh 'kubectl apply -f deployment.yaml'
+                }
+              }
+            // steps{
+            //     sh 'kubectl apply -f deployment.yaml' 
+            // }
         }
     }
 }
