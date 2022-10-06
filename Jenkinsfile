@@ -33,9 +33,14 @@ pipeline{
                 } 
            }
            stage('Deploying into k8s'){
-            steps{
-                sh 'kubectl apply -f deployment.yaml' 
-            }
+              steps{
+                scripts {
+                  kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes")
+                }
+              }
+            // steps{
+            //     sh 'kubectl apply -f deployment.yaml' 
+            // }
         }
     }
 }
