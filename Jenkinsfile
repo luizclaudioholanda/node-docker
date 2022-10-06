@@ -5,6 +5,9 @@ pipeline{
     dockerImage = ''
   }
   agent any
+
+    tools { nodejs "node" }
+
     stages {
         stage('Build'){
            steps{
