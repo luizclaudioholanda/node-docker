@@ -34,7 +34,7 @@ pipeline{
            }
            stage('Deploying into k8s'){
             steps{
-                sh 'kubectl apply -f deployment.yaml --token $TOKEN_FROM_WITH_CREDENTIALS' 
+                sh 'kubectl apply -f deployment.yaml' 
             }
         }
     }
