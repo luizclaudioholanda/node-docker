@@ -34,7 +34,7 @@ pipeline{
            }
            stage('Deploying into k8s'){
             steps{
-                sh 'kubectl apply -f deployment.yml --context minikube' 
+                sh 'kubectl apply -f deployment.yml --context default' 
             }
         }
     }
