@@ -22,22 +22,27 @@ pipeline{
                   dockerImage = docker.build registry + ":latest"
                  }
              }
+        }
+        stage('Push Image') {
+            steps{
+                script {
+                      docker.withRegistry( '', registryCredential){                            
+                      dockerImage.push()
+                    }
+                  }
+              } 
+        }
+        stage('Deploying into k8s'){
+          steps{
+            withKubeConfig([credentialsId: 'minikube']) {
+              sh 'kubectl apply -f deployment.yaml'
+            }
           }
-          stage('Push Image') {
-              steps{
-                  script {
-                       docker.withRegistry( '', registryCredential){                            
-                       dockerImage.push()
-                      }
-                   }
-                } 
-           }
-           stage('Deploying into k8s'){
-              steps{
-                withKubeConfig([credentialsId: 'minikube']) {
-                  sh 'kubectl apply -f deployment.yaml'
-                }
-              }
+        }
+        stage('Cleaning up'){
+          steps{
+            sh "docker rmi --force $registry:latest"
+          }
         }
     }
 }
