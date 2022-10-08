@@ -34,7 +34,7 @@ pipeline{
               } 
         }
         stage('Update Manifest') {
-          build job:'updatemanifest' parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+          build job:'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
         }
         // stage('Deploying into k8s'){
         //   steps{
