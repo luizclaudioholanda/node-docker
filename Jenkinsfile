@@ -38,12 +38,5 @@ pipeline{
             build job:'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
           }
         }
-        // stage('Deploying into k8s'){
-        //   steps{
-        //     withKubeConfig([credentialsId: 'minikube']) {
-        //       sh 'kubectl apply -f deployment.yaml'
-        //     }
-        //   }
-        // }
     }
 }
